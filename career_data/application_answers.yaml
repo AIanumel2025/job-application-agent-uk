@@ -1,0 +1,84 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+identity:
+  full_name: Anthony L. Anumel
+  email: aanumel2025@gmail.com
+  phone: 07957731050
+  location: London, United Kingdom
+  requires_review: true
+answers:
+  right_to_work_in_uk:
+    answer: Yes. I currently have the right to work in the UK under the Graduate Visa route.
+    requires_user_input: false
+    sensitivity: high
+    instruction: Use exact current immigration and work-authorisation wording. Review before every submission.
+    review_before_submission: true
+    confirmed_on: '2026-07-29'
+  requires_current_or_future_sponsorship:
+    answer: Yes. I will require employer sponsorship in the future.
+    requires_user_input: false
+    sensitivity: high
+    instruction: Answer truthfully and distinguish present work permission from future sponsorship needs.
+    review_before_submission: true
+    confirmed_on: '2026-07-29'
+  notice_period:
+    answer: One month
+    requires_user_input: false
+    confirmed_on: '2026-07-29'
+  earliest_start_date:
+    answer: '2026-09-07'
+    requires_user_input: false
+    display_answer: 7 September 2026
+    confirmed_on: '2026-07-29'
+  salary_expectation_gbp:
+    answer:
+      minimum: 50000
+      currency: GBP
+      display: £50,000
+    requires_user_input: false
+    instruction: May be set as a range or marked negotiable depending on the role.
+    review_before_submission: true
+    confirmed_on: '2026-07-29'
+  willing_to_relocate:
+    answer: true
+    requires_user_input: false
+    confirmed_on: '2026-07-29'
+  remote_hybrid_onsite_preference:
+    answer:
+    - Remote
+    - Hybrid
+    requires_user_input: false
+    confirmed_on: '2026-07-29'
+  preferred_locations:
+    answer:
+    - Richmond
+    - London
+    - Kingston upon Thames
+    - Surbiton
+    - Canary Wharf
+    requires_user_input: false
+    instruction: Add Greater London, Surrey, UK-wide or remote preferences where applicable.
+    confirmed_on: '2026-07-29'
+  driving_licence:
+    answer: N/A
+    requires_user_input: false
+    confirmed_on: '2026-07-29'
+  security_clearance:
+    answer: null
+    requires_user_input: true
+  willing_to_travel:
+    answer: null
+    requires_user_input: true
+approved_general_statements:
+  professional_focus: I am seeking AI engineering and adjacent data roles where I can apply Python, machine
+    learning, NLP, document intelligence and cloud data engineering.
+  truthfulness_declaration: All generated application content must remain traceable to the supplied career
+    evidence and must not invent experience, qualifications or results.
+review_rule: Right-to-work, sponsorship, salary and availability answers are populated, but immigration
+  and sponsorship wording must still be reviewed before each submission.
+employment_types:
+  answer:
+  - Permanent
+  - Contract
+  confirmed_on: '2026-07-29'

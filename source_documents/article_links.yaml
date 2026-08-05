@@ -1,0 +1,66 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+owner: Anthony L. Anumel
+medium_profile: https://medium.com/@aanumel2025
+articles:
+- article_id: article_world_mask_catalog
+  title: A Daily World Mask Catalog That Posts Itself
+  url: https://medium.com/@aanumel2025/a-daily-world-mask-catalog-that-posts-itself-750a4129866a
+  published_date: '2026-07-26'
+  date_status: inferred_from_pdf_capture_date_and_three_days_ago_label
+  related_project_ids:
+  - world_mask_catalog_automation
+  local_file: source_documents/articles/A Daily World Mask Catalog That Posts Itself _ by Anthony Anumel
+    _ Jul, 2026 _ Medium.pdf
+  topics:
+  - automation
+  - Python
+  - GitHub Actions
+  - data engineering
+  - cultural heritage
+  status: confirmed
+- article_id: article_asthma_intelligence
+  title: 'Turning Asthma Data Into Actionable Intelligence: A National Level Solution'
+  url: https://medium.com/@aanumel2025/turning-asthma-data-into-actionable-intelligence-a-national-level-solution-7c7211eb7513
+  published_date: '2026-02-22'
+  date_status: stated_in_article
+  related_project_ids:
+  - asthma_deterioration_intelligence
+  local_file: source_documents/articles/Turning Asthma Data Into Actionable Intelligence_ A National Level
+    Solution _ by Anthony Anumel _ Medium.pdf
+  topics:
+  - machine learning
+  - health analytics
+  - class imbalance
+  - model sensitivity
+  status: confirmed
+- article_id: article_imbalanced_gesture_models
+  title: Choosing the Right Machine Learning Model When Your Data is Imbalanced
+  url: https://medium.com/@aanumel2025/choosing-the-right-machine-learning-model-when-your-data-is-imbalanced-ba1593de9ad1
+  published_date: '2026-04-03'
+  date_status: stated_in_article
+  related_project_ids:
+  - gesture_phase_segmentation
+  local_file: source_documents/articles/Choosing the Right Machine Learning Model When Your Data is Imbalanced
+    _ by Anthony Anumel _ Medium.pdf
+  topics:
+  - machine learning
+  - class imbalance
+  - gesture recognition
+  - model evaluation
+  status: confirmed
+- article_id: article_teaching_machines_tweets
+  title: Teaching Machines to “Feel” Tweets
+  url: https://medium.com/@aanumel2025/teaching-machines-to-feel-tweets-bf06efb495f5
+  published_date: '2026-05-22'
+  date_status: stated_in_article
+  related_project_ids:
+  - logos_sentiment_intelligence
+  local_file: source_documents/articles/Teaching Machines to “Feel” Tweets _ by Anthony Anumel _ Medium.pdf
+  topics:
+  - NLP
+  - transformers
+  - sentiment analysis
+  - Twitter-RoBERTa
+  status: confirmed

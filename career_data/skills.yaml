@@ -1,0 +1,144 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+skills:
+  programming:
+  - name: Python
+    proficiency: intermediate
+    evidence_level: cv_and_multiple_projects
+  - name: SQL
+    proficiency: intermediate
+    evidence_level: cv_and_data_projects
+  - name: Bash
+    proficiency: null
+    evidence_level: not_explicitly_documented
+  machine_learning_and_ai:
+  - name: Machine learning
+    evidence_level: cv_and_multiple_projects
+  - name: Deep learning
+    evidence_level: cv_and_organai_project
+  - name: Natural language processing
+    evidence_level: cv_and_logos_project
+  - name: Retrieval-augmented generation
+    evidence_level: cv_and_internship
+  - name: Computer vision
+    evidence_level: cv_and_document_intelligence_project
+  - name: Neural networks
+    evidence_level: cv_and_organai_project
+  - name: Transfer learning
+    evidence_level: organai_project
+  - name: Class-imbalance handling
+    evidence_level: gesture_and_asthma_projects
+  - name: Model evaluation
+    evidence_level: multiple_projects
+  frameworks_and_libraries:
+  - name: TensorFlow
+    evidence_level: cv_and_organai_project
+  - name: PyTorch
+    evidence_level: cv_and_logos_project
+  - name: Keras
+    evidence_level: cv_and_organai_project
+  - name: Hugging Face Transformers
+    evidence_level: cv_and_logos_project
+  - name: scikit-learn
+    evidence_level: gesture_and_logos_projects
+  - name: Pandas
+    evidence_level: fintech_and_ml_projects
+  - name: OpenCV
+    evidence_level: document_intelligence_project
+  - name: LangChain
+    evidence_level: listed_in_cv
+  - name: LayoutLMv3
+    evidence_level: cv_and_document_intelligence_project
+  - name: dbt
+    evidence_level: cv_and_fintechflow_project
+  - name: FastAPI
+    evidence_level: cv_project_description
+  - name: Streamlit
+    evidence_level: logos_project
+  - name: Gradio
+    evidence_level: organai_project
+  - name: pytest
+    evidence_level: document_intelligence_project
+  data_engineering:
+  - name: ETL pipeline development
+    evidence_level: document_intelligence_and_fintechflow
+  - name: Bronze-silver-gold architecture
+    evidence_level: fintechflow
+  - name: Data quality validation
+    evidence_level: document_intelligence_and_fintechflow
+  - name: Parquet
+    evidence_level: fintechflow
+  - name: Data modelling
+    evidence_level: fintechflow
+  - name: Web ingestion and scraping
+    evidence_level: document_intelligence
+  cloud:
+  - name: Amazon S3
+    evidence_level: cv_and_multiple_projects
+  - name: AWS Glue
+    evidence_level: cv_and_fintechflow
+  - name: Amazon Athena
+    evidence_level: cv_and_multiple_projects
+  - name: AWS IAM
+    evidence_level: fintechflow
+  - name: AWS Secrets Manager
+    evidence_level: fintechflow
+  - name: Amazon QuickSight
+    evidence_level: fintechflow
+  - name: Amazon SageMaker
+    evidence_level: listed_in_cv_only
+  - name: AWS Lambda
+    evidence_level: listed_in_cv_only
+  - name: Amazon ECS Fargate
+    evidence_level: listed_in_cv_only
+  - name: AWS CDK
+    evidence_level: listed_in_cv_only
+  - name: AWS Step Functions
+    evidence_level: listed_in_cv_only
+  databases_and_vector_stores:
+  - name: PostgreSQL
+    evidence_level: cv_and_document_intelligence
+  - name: MongoDB
+    evidence_level: listed_in_cv
+  - name: pgvector
+    evidence_level: listed_in_cv
+  - name: Qdrant
+    evidence_level: listed_in_cv
+  developer_tools:
+  - name: Git
+    evidence_level: cv_and_projects
+  - name: GitHub
+    evidence_level: projects
+  - name: GitHub Actions
+    evidence_level: world_mask_catalog
+  - name: Docker
+    evidence_level: cv_and_multiple_projects
+  - name: Jupyter Notebook
+    evidence_level: cv_and_projects
+  analytics_and_visualisation:
+  - name: Power BI
+    evidence_level: verified_certification
+  - name: Tableau
+    evidence_level: fintechflow
+  - name: Matplotlib
+    evidence_level: multiple_projects
+  - name: Plotly
+    evidence_level: logos_project
+  professional:
+  - name: Analytical thinking
+    evidence_level: listed_in_cv
+  - name: Attention to detail
+    evidence_level: listed_in_cv
+  - name: Presentation
+    evidence_level: listed_in_cv
+  - name: Technical documentation
+    evidence_level: readmes_and_medium_articles
+  - name: Collaboration with senior engineers
+    evidence_level: internship
+usage_rules:
+- Use 'intermediate' only for Python and SQL because those levels are explicitly stated in the CV.
+- Describe technologies listed only in the CV as knowledge or exposure unless further project evidence
+  is added.
+- Do not describe project experience as commercial experience unless it was performed during the BINAPANI
+  internship.

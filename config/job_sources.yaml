@@ -1,0 +1,78 @@
+# Phase 3 vacancy-source configuration
+
+fetch:
+  timeout_seconds: 20
+  max_bytes: 5000000
+  user_agent: "UKJobApplicationAgent/1.0"
+
+sources:
+  company_site:
+    enabled: true
+    parser_priority:
+      - json_ld_job_posting
+      - generic_html
+
+  greenhouse:
+    enabled: true
+    parser_priority:
+      - json_ld_job_posting
+      - generic_html
+
+  lever:
+    enabled: true
+    parser_priority:
+      - json_ld_job_posting
+      - generic_html
+
+  workable:
+    enabled: true
+    parser_priority:
+      - json_ld_job_posting
+      - generic_html
+
+  ashby:
+    enabled: true
+    parser_priority:
+      - json_ld_job_posting
+      - generic_html
+
+  smartrecruiters:
+    enabled: true
+    parser_priority:
+      - json_ld_job_posting
+      - generic_html
+
+  linkedin_alert:
+    enabled: true
+    notes: "Use public vacancy links only. Do not bypass login or access controls."
+
+  indeed_alert:
+    enabled: true
+    notes: "Use public vacancy links only. Do not bypass login or access controls."
+
+  reed:
+    enabled: true
+
+  totaljobs:
+    enabled: true
+
+  civil_service_jobs:
+    enabled: true
+
+  nhs_jobs:
+    enabled: true
+
+  manual:
+    enabled: true
+
+  other:
+    enabled: true
+
+deduplication:
+  company_similarity_threshold: 0.92
+  title_similarity_threshold: 0.88
+  location_similarity_threshold: 0.90
+
+storage:
+  database_path: "data/jobs.db"
+  report_path: "reports/job_ingestion_report.json"

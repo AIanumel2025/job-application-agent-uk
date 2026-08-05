@@ -1,0 +1,53 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+experience:
+- experience_id: binapani_ai_engineer_intern
+  employer: BINAPANI
+  role: AI Engineer Intern
+  location: Sutton, London, United Kingdom
+  employment_type: Internship
+  start_date: 2025-09
+  end_date: 2026-07
+  date_precision: month
+  responsibilities:
+  - Collaborated with senior engineers to develop an end-to-end document intelligence pipeline for extracting
+    structured data from complex PDF documents.
+  - Implemented computer-vision-based region detection to identify and isolate relevant sections from
+    scanned document pages.
+  - Built a retrieval-augmented generation pipeline using large language models, embedding models and
+    vector databases to match student queries to relevant questions.
+  - Used Amazon S3 and Athena in data-engineering workflows supporting scalable data handling and preprocessing.
+  achievements:
+  - claim_id: claim_doc_intelligence_preprocessing_50
+    statement: Improved data quality and preprocessing by approximately 50%.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_doc_intelligence_position_80
+    statement: Achieved approximately 80% positional accuracy in document-region detection.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_doc_intelligence_efficiency_75
+    statement: Increased workflow efficiency by approximately 75% using AWS-backed data handling.
+    verification_status: source_supported_needs_underlying_evidence
+  skills:
+  - Python
+  - Document intelligence
+  - Computer vision
+  - OpenCV
+  - RAG
+  - LLMs
+  - Embeddings
+  - Vector databases
+  - Amazon S3
+  - Amazon Athena
+  - ETL
+  - Docker
+  related_project_ids:
+  - document_intelligence_etl_pipeline
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  - source_documents/projects/README document intelligence.md
+  open_questions:
+  - Confirm whether BINAPANI should be written in capitals in applications.
+  - Confirm whether the internship ended in July 2026 or is still active through the end of the month.
+coverage_note: Only employment described in the uploaded CV is included. Earlier employment should be
+  added later if relevant.

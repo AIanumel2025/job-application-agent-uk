@@ -1,0 +1,88 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional
+role_strategy:
+  primary_roles:
+  - title: AI Engineer
+    basis: explicitly stated in the current CV
+    priority: 1
+  - title: Junior AI Engineer
+    basis: aligned with internship and project evidence
+    priority: 2
+  - title: Machine Learning Engineer
+    basis: supported by deep learning, NLP and classical ML projects
+    priority: 3
+  - title: Data Engineer
+    basis: supported by AWS, ETL and banking pipeline work
+    priority: 4
+  secondary_roles:
+  - NLP Engineer
+  - Document AI Engineer
+  - Cloud Data Engineer
+  - Analytics Engineer
+  - Graduate Data Engineer
+  - Junior Data Scientist
+  - Data Analyst
+  - Business Intelligence Analyst
+  roles_to_avoid_without_strong_exception:
+  - Senior AI Engineer
+  - Lead Machine Learning Engineer
+  - Principal Data Engineer
+  - Head of Data
+  - Roles requiring extensive commercial experience not shown in the career database
+seniority:
+  preferred:
+  - Graduate
+  - Entry level
+  - Junior
+  - Associate
+  consider_selectively:
+  - Mid-level
+  avoid:
+  - Senior
+  - Lead
+  - Principal
+  - Head
+location_preferences:
+  confirmed:
+  - Richmond
+  - London
+  - Kingston upon Thames
+  - Surbiton
+  - Canary Wharf
+  work_models:
+  - Remote
+  - Hybrid
+  willing_to_relocate: true
+employment_preferences:
+  permanent: true
+  fixed_term: null
+  graduate_scheme: null
+  placement: false
+  internship: false
+  contract: true
+  status: confirmed_by_user_2026-07-29
+search_keywords:
+- AI Engineer
+- Junior AI Engineer
+- Machine Learning Engineer
+- Graduate Machine Learning Engineer
+- Data Engineer
+- Graduate Data Engineer
+- NLP Engineer
+- Document AI
+- RAG Engineer
+- Cloud Data Engineer
+- AWS Data Engineer
+- Analytics Engineer
+- Data Analyst
+- Power BI Analyst
+minimum_salary_gbp: 50000
+sponsorship_filter:
+  currently_authorised_to_work_in_uk: true
+  current_visa_route: Graduate Visa
+  future_sponsorship_required: true
+  exclude_roles_explicitly_stating_no_future_sponsorship: true
+  treat_silent_sponsorship_status_as: unknown_not_automatic_rejection
+open_questions:
+- Confirm whether fixed-term roles and graduate schemes should be included.

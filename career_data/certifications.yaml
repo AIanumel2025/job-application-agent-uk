@@ -1,0 +1,29 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+certifications:
+- certification_id: microsoft_power_bi_data_analyst_associate
+  name: 'Microsoft Certified: Power BI Data Analyst Associate'
+  exam_or_code: PL-300
+  provider: Microsoft
+  earned_date: '2025-07-30'
+  expiry_date: '2027-07-31'
+  credential_id: CE6B7B9FCEC4640D
+  certification_number: 378060-4D207H
+  credential_url: https://learn.microsoft.com/en-gb/users/tonyanumel-2360/credentials/certification/data-analyst-associate?tab=credentials-tab
+  local_file: source_documents/certifications/Credentials - tonyanumel-2360 _ Microsoft Learn.pdf
+  verification_status: verified_from_uploaded_credential
+- certification_id: aws_academy_data_engineering
+  name: AWS Academy Graduate - Data Engineering - Training Badge
+  provider: AWS Academy
+  earned_date: '2026-05-10'
+  earned_date_original: 05/10/2026
+  earned_date_interpretation: Confirmed by the user as 10 May 2026.
+  course_hours: 40
+  credential_url: https://www.credly.com/go/85RUM1n1
+  local_file: source_documents/certifications/AWS_Academy_Graduate___Data_Engineering___Training_Badge_Badge20260729-9-i4l86.pdf
+  badge_image: source_documents/certifications/aws-academy-graduate-data-engineering-training-badg.png
+  verification_status: verified_from_uploaded_credential_and_user_confirmation
+application_notes:
+- The Microsoft credential can be treated as independently verifiable.
+- The AWS Academy completion date is confirmed as 10 May 2026.

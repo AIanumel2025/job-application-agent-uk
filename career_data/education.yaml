@@ -1,0 +1,35 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+education:
+- education_id: kingston_msc_ai
+  institution: Kingston University
+  location: Kingston upon Thames, United Kingdom
+  qualification: MSc Artificial Intelligence
+  start_date: 2025-09
+  end_date: 2027-01
+  status: in_progress
+  classification: null
+  relevant_coursework:
+  - Machine Learning
+  - Deep Learning
+  - Big Data and Data Mining
+  - Natural Language Processing
+  thesis:
+    title: Enhancing a Markov-Weibull pavement deterioration model using machine learning transition probabilities
+    status: needs_confirmation
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+- education_id: knust_bsc_civil_engineering
+  institution: Kwame Nkrumah University of Science and Technology
+  location: Kumasi, Ghana
+  qualification: BSc Civil Engineering
+  start_date: 2008-08
+  end_date: 2012-12
+  status: completed
+  classification: null
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+open_questions:
+- Add degree classifications only if you want them used in applications.
+- Confirm whether the MSc end date is programme completion, graduation or both.

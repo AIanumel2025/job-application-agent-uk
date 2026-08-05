@@ -1,0 +1,79 @@
+# Phase 5 application-generation configuration
+
+language:
+  locale: en-GB
+  spelling: british
+  tone: professional
+  use_first_person: true
+
+human_review:
+  required_before_submission: true
+  allow_automatic_submission: false
+
+evidence:
+  require_approved_for_application: true
+  prefer_verified: true
+  allow_confidential_projects: false
+  maximum_items_per_section: 5
+  minimum_relevance_score: 0.35
+
+claims:
+  block_unverified_metrics: true
+  block_invented_years: true
+  block_unapproved_achievements: true
+  block_confidential_repository_links: true
+  block_unsupported_leadership_claims: true
+  block_unsupported_production_claims: true
+  require_source_evidence_for_numbers: true
+
+cv:
+  maximum_pages: 2
+  summary_word_limit: 90
+  maximum_skills: 18
+  maximum_experience_bullets_per_role: 5
+  maximum_projects: 3
+  include_education: true
+  include_certifications: true
+  include_links: true
+  include_references: false
+
+cover_letter:
+  minimum_words: 250
+  maximum_words: 500
+  paragraph_count_minimum: 3
+  paragraph_count_maximum: 5
+  mention_company: true
+  mention_role: true
+  include_call_to_action: true
+
+application_answers:
+  default_maximum_words: 250
+  sponsorship_answer_requires_review: true
+  salary_answer_requires_review: true
+  right_to_work_answer_requires_review: true
+  start_date_answer_requires_review: false
+
+quality:
+  minimum_relevance_score: 70
+  maximum_repetition_ratio: 0.20
+  minimum_keyword_coverage: 0.50
+  block_placeholders:
+    - "[COMPANY]"
+    - "[ROLE]"
+    - "[NAME]"
+    - "TODO"
+    - "TBC"
+  generic_phrases_to_flag:
+    - "I am passionate about"
+    - "I am a perfect fit"
+    - "results-driven professional"
+    - "dynamic individual"
+    - "hard-working team player"
+
+outputs:
+  root_directory: output/applications
+  cv_filename: tailored_cv.md
+  cover_letter_filename: cover_letter.md
+  answers_filename: application_answers.json
+  interview_evidence_filename: interview_evidence.md
+  manifest_filename: application_manifest.json

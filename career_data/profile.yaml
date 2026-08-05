@@ -1,0 +1,63 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+person:
+  full_name: Anthony L. Anumel
+  name_variants:
+  - Anthony Anumel
+  - Anthony Lucian Anumel
+  location:
+    city_or_area: London
+    country: United Kingdom
+    source: current_cv
+  contact:
+    email: aanumel2025@gmail.com
+    phone: 07957731050
+    privacy_note: Keep the repository private. Do not expose this contact block in public datasets or
+      logs.
+professional_identity:
+  primary_title: AI Engineer
+  headline: AI Engineer focused on document intelligence, machine learning, NLP, RAG and cloud data pipelines.
+  summary: AI Engineer with project and internship experience in Python, machine learning, deep learning,
+    natural language processing, document intelligence, RAG and AWS data workflows. Builds end-to-end
+    AI and data systems, including PDF extraction pipelines, transformer-based sentiment analysis, medical
+    image classification and cloud banking data pipelines.
+  summary_status: normalised_from_cv_and_supplied_project_materials
+profiles:
+  github: https://github.com/AIanumel2025
+  medium: https://medium.com/@aanumel2025
+  linkedin: https://www.linkedin.com/in/tonyanumelmsc/
+  portfolio: null
+career_preferences:
+  primary_role: AI Engineer
+  preferred_locations:
+  - Richmond
+  - London
+  - Kingston upon Thames
+  - Surbiton
+  - Canary Wharf
+  work_model:
+  - Remote
+  - Hybrid
+  employment_types:
+  - Permanent
+  - Contract
+  minimum_salary_gbp: 50000
+  availability:
+    notice_period: 1 month
+    earliest_start_date: '2026-09-07'
+  relocation: true
+  right_to_work:
+    authorised_to_work_in_uk: true
+    visa_route: Graduate Visa
+    future_sponsorship_required: true
+    review_before_submission: true
+  driving_licence: N/A
+  status: confirmed_by_user_2026-07-29
+source_files:
+- source_documents/cv/anthony_anumel_ai.docx
+- source_documents/projects/README document intelligence.md
+- source_documents/projects/README dl.md
+- source_documents/projects/README Gesture.md
+- source_documents/projects/README fintech.md
+- source_documents/projects/README Sentiment.md

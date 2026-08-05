@@ -1,0 +1,29 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+owner: Anthony L. Anumel
+profiles:
+  github:
+    url: https://github.com/AIanumel2025
+    username: AIanumel2025
+    source: user_provided
+    status: confirmed
+  medium:
+    url: https://medium.com/@aanumel2025
+    username: '@aanumel2025'
+    source: user_provided
+    status: confirmed
+  linkedin:
+    url: https://www.linkedin.com/in/tonyanumelmsc/
+    slug: tonyanumelmsc
+    source: user_provided
+    status: confirmed
+  x:
+    url: https://x.com/L_vcian
+    username: '@L_vcian'
+    source: world_mask_catalog_medium_article
+    status: needs_user_confirmation
+  portfolio:
+    url: null
+    source: null
+    status: not_provided

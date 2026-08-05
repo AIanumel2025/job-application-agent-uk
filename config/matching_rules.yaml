@@ -1,0 +1,82 @@
+# Phase 4 job-matching configuration
+
+score_bands:
+  strong:
+    minimum: 85
+    recommendation: strong_match
+  good:
+    minimum: 70
+    recommendation: good_match
+  possible:
+    minimum: 55
+    recommendation: possible_match
+  weak:
+    minimum: 40
+    recommendation: weak_match
+  poor:
+    minimum: 0
+    recommendation: do_not_apply
+
+weights:
+  skills: 0.30
+  experience: 0.25
+  eligibility: 0.20
+  preferences: 0.15
+  evidence_quality: 0.10
+
+preference_weights:
+  salary: 0.45
+  location_and_work_model: 0.40
+  employment_type: 0.15
+
+ranking:
+  match_score: 0.70
+  urgency: 0.15
+  strategic_value: 0.15
+  hard_stop_ranking_score: 0
+
+skill_matching:
+  exact_score: 1.00
+  strong_related_score: 0.85
+  transferable_score: 0.60
+  weak_score: 0.30
+  missing_score: 0.00
+  required_priority_multiplier: 1.50
+  preferred_priority_multiplier: 1.00
+
+eligibility:
+  hard_stops:
+    - no_sponsorship
+    - citizenship_restriction
+    - security_clearance
+    - mandatory_certification
+    - mandatory_education
+    - driving_licence
+    - start_date
+    - salary_floor
+    - right_to_work
+
+  unclear_requires_manual_review: true
+  hard_stop_recommendations:
+    - not_eligible
+    - do_not_apply
+
+candidate_preferences:
+  minimum_salary: 50000
+  preferred_locations:
+    - Richmond
+    - London
+    - Kingston upon Thames
+    - Surbiton
+    - Canary Wharf
+  preferred_work_models:
+    - Remote
+    - Hybrid
+  preferred_employment_types:
+    - Permanent
+    - Contract
+  willing_to_relocate: true
+
+reports:
+  json_path: reports/job_match_scores.json
+  csv_path: reports/ranked_jobs.csv

@@ -1,0 +1,58 @@
+{
+  "package": "UK Job Application Agent - Phase 1 YAML",
+  "generated_on": "2026-07-29",
+  "last_updated_on": "2026-07-29",
+  "file_count": 13,
+  "validation": {
+    "career_data/achievements.yaml": "valid",
+    "career_data/application_answers.yaml": "valid",
+    "career_data/certifications.yaml": "valid",
+    "career_data/education.yaml": "valid",
+    "career_data/experience.yaml": "valid",
+    "career_data/profile.yaml": "valid",
+    "career_data/projects.yaml": "valid",
+    "career_data/skills.yaml": "valid",
+    "career_data/target_roles.yaml": "valid",
+    "source_documents/article_links.yaml": "valid",
+    "source_documents/certification_index.yaml": "valid",
+    "source_documents/profile_links.yaml": "valid",
+    "source_documents/project_links.yaml": "valid"
+  },
+  "confirmed_user_preferences": {
+    "right_to_work": "Graduate Visa",
+    "future_sponsorship_required": true,
+    "notice_period": "1 month",
+    "earliest_start_date": "2026-09-07",
+    "minimum_salary_gbp": 50000,
+    "preferred_locations": [
+      "Richmond",
+      "London",
+      "Kingston upon Thames",
+      "Surbiton",
+      "Canary Wharf"
+    ],
+    "work_models": [
+      "Remote",
+      "Hybrid"
+    ],
+    "willing_to_relocate": true,
+    "employment_types": [
+      "Permanent",
+      "Contract"
+    ],
+    "driving_licence": "N/A"
+  },
+  "repository_visibility": {
+    "document_intelligence": "not shareable due to NDA",
+    "world_mask_catalog": "not shareable",
+    "asthma_project": "public URL recorded"
+  },
+  "remaining_items_needing_confirmation": [
+    "Exact subfolder paths for OrganAI and Gesture Phase Segmentation",
+    "FintechFlow 80% loan-risk accuracy claim",
+    "OrganAI 30% transfer-learning improvement baseline",
+    "MSc thesis status, methods and results",
+    "Whether fixed-term roles and graduate schemes should be included",
+    "Whether the asthma project was individual or team-based"
+  ]
+}

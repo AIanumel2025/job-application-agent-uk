@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uk-job-application-agent"
+version = "0.1.0"
+description = "A human-in-the-loop UK job application preparation system."
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML==6.0.2",
+    "pydantic==2.13.4",
+    "rich==14.1.0",
+    "python-dateutil==2.9.0.post0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.4.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-ra"
+
+[tool.setuptools]
+packages = ["src"]

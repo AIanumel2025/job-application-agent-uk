@@ -1,0 +1,388 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+projects:
+- project_id: document_intelligence_etl_pipeline
+  name: Document Intelligence ETL Pipeline
+  context: AI engineering internship and portfolio project
+  status: developed
+  summary: A modular AI document ETL pipeline that converts mathematics worksheet PDFs into structured,
+    analysis-ready records.
+  problem: Extract structured mathematical questions from variable PDF sources containing scanned pages,
+    layouts, text and mathematical notation.
+  workflow:
+  - Discover PDF sources from target websites.
+  - Download, normalise and deduplicate PDFs.
+  - Render PDF pages as cleaned images.
+  - Detect question boundaries using LayoutLMv3 signals and classical computer-vision heuristics.
+  - Crop regions and perform Mathpix OCR to Markdown and LaTeX-friendly text.
+  - Score extraction quality using heuristics.
+  - Transform outputs into structured question-level records.
+  - Persist records to PostgreSQL and JSONL-compatible outputs.
+  - Package the pipeline with Docker and automated pytest quality gates.
+  technologies:
+  - Python
+  - Jupyter
+  - requests
+  - Beautiful Soup
+  - Selenium or Playwright patterns
+  - OpenCV
+  - LayoutLMv3
+  - Hugging Face Transformers
+  - Mathpix API
+  - PostgreSQL
+  - JSONL
+  - Docker
+  - pytest
+  - Amazon S3
+  - Amazon Athena
+  - RAG
+  - LLMs
+  - embeddings
+  - vector databases
+  outcomes:
+  - claim_id: claim_doc_intelligence_preprocessing_50
+    statement: Improved data quality and preprocessing by approximately 50%.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_doc_intelligence_position_80
+    statement: Achieved approximately 80% positional accuracy for region detection.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_doc_intelligence_efficiency_75
+    statement: Increased workflow efficiency by approximately 75% using S3 and Athena.
+    verification_status: source_supported_needs_underlying_evidence
+  target_roles:
+  - AI Engineer
+  - Data Engineer
+  - Machine Learning Engineer
+  - Document AI Engineer
+  repository_url: null
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  - source_documents/projects/README document intelligence.md
+  open_questions: []
+  repository_visibility: confidential_not_shareable_due_to_nda
+- project_id: organai_medical_image_classification
+  name: 'OrganAI: Deep Learning for Abdominal Organ Classification from CT Scans'
+  context: Deep learning portfolio project
+  status: developed
+  summary: A deep learning system comparing custom CNN, ResNet50 and EfficientNetB0 architectures to classify
+    11 abdominal organs from CT slices.
+  dataset:
+    name: OrganMNIST / MedMNIST v2
+    classes: 11
+    image_format: 128x128 grayscale abdominal CT slices
+    train_instances_approx: 13900
+    validation_instances_approx: 2450
+    test_instances_approx: 8800
+  methods:
+  - Custom convolutional neural network
+  - ResNet50 transfer learning
+  - EfficientNetB0 transfer learning
+  - Data preprocessing and augmentation
+  - Model evaluation and comparison
+  technologies:
+  - Python
+  - TensorFlow
+  - Keras
+  - Docker
+  - FastAPI
+  - Gradio
+  - ONNX-ready export
+  outcomes:
+  - claim_id: claim_organai_accuracy_75
+    statement: Achieved approximately 75% classification accuracy.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_organai_transfer_boost_30
+    statement: Transfer learning produced an approximately 30% performance improvement.
+    verification_status: needs_baseline_definition
+  deployment:
+  - REST API using FastAPI
+  - Docker container
+  - Gradio or Streamlit inference demo
+  target_roles:
+  - Machine Learning Engineer
+  - AI Engineer
+  - Computer Vision Engineer
+  repository_url: https://github.com/AIanumel2025/machine_deep-learning-portfolio
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  - source_documents/projects/README dl.md
+  open_questions:
+  - Confirm the exact notebook or folder path inside machine_deep-learning-portfolio.
+  - Define the baseline used for the reported 30% transfer-learning improvement.
+- project_id: gesture_phase_segmentation
+  name: Gesture Phase Segmentation
+  context: Machine learning portfolio project
+  status: developed
+  summary: A multiclass machine learning system for recognising five phases of human gestures while addressing
+    severe class imbalance.
+  dataset:
+    name: Gesture Phase Segmentation Dataset
+    instances_approx: 9900
+    features: 32
+    classes:
+    - Preparation
+    - Stroke
+    - Hold
+    - Retraction
+    - Rest
+    main_challenge: Severe class imbalance, especially for Hold and Retraction.
+  methods:
+  - Feature scaling
+  - Class weighting
+  - Principal component analysis
+  - K-nearest neighbours
+  - Random forest
+  - Gradient boosting
+  - Support vector machine
+  - Balanced accuracy, macro F1, macro recall and ROC-AUC evaluation
+  outcomes:
+  - claim_id: claim_gesture_pca_95
+    statement: Reduced feature-space complexity while preserving approximately 95% of dataset variance
+      using PCA.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_gesture_knn_balanced
+    statement: KNN produced the most balanced performance across the five gesture phases.
+    verification_status: source_supported
+  - claim_id: claim_gesture_rf_overall
+    statement: Random Forest was the strongest overall performer for discriminative power, AUC and probability
+      calibration.
+    verification_status: source_supported
+  technologies:
+  - Python
+  - Pandas
+  - scikit-learn
+  - XGBoost or LightGBM
+  - Matplotlib
+  target_roles:
+  - Machine Learning Engineer
+  - Data Scientist
+  - AI Engineer
+  repository_url: https://github.com/AIanumel2025/machine_deep-learning-portfolio
+  article_url: https://medium.com/@aanumel2025/choosing-the-right-machine-learning-model-when-your-data-is-imbalanced-ba1593de9ad1
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  - source_documents/projects/README Gesture.md
+  - source_documents/articles/Choosing the Right Machine Learning Model When Your Data is Imbalanced _
+    by Anthony Anumel _ Medium.pdf
+  open_questions:
+  - Confirm the exact notebook or folder path inside machine_deep-learning-portfolio.
+- project_id: fintechflow_banking_data_pipeline
+  name: 'FintechFlow: Banking Data Pipeline on AWS'
+  context: Cloud data engineering portfolio project
+  status: developed
+  summary: A production-oriented AWS banking data pipeline that simulates a UK bank's bronze, silver and
+    gold data architecture.
+  dataset:
+    branches: 800
+    customers: 1000000
+    transactions: 3000000
+    loans: 200000
+    total_rows: 4200800
+    data_characteristics: Synthetic data with deliberately injected nulls, duplicates, inconsistent values
+      and invalid records.
+  architecture:
+  - Generate synthetic banking data using Python and Faker.
+  - Ingest raw CSVs to an Amazon S3 bronze layer with boto3.
+  - Register schemas using AWS Glue Crawler and Glue Data Catalog.
+  - Validate raw data with Amazon Athena.
+  - Clean and transform data using AWS Glue Python Shell jobs into Parquet silver tables.
+  - Create gold analytical marts using dbt and Athena.
+  - Prepare Tableau or QuickSight-ready datasets for branch, customer and loan analysis.
+  technologies:
+  - Python
+  - Pandas
+  - Faker
+  - boto3
+  - Amazon S3
+  - AWS Glue
+  - Glue Data Catalog
+  - Amazon Athena
+  - Parquet
+  - dbt
+  - Tableau
+  - Amazon QuickSight
+  - AWS IAM
+  - AWS Secrets Manager
+  - SQL
+  outcomes:
+  - claim_id: claim_fintech_rows_4_2m
+    statement: Processed more than 4.2 million branch, customer, transaction and loan records.
+    verification_status: source_supported
+  - claim_id: claim_fintech_overhead_40
+    statement: Reduced data-storage and processing overhead by approximately 40%.
+    verification_status: source_supported_needs_underlying_evidence
+  - claim_id: claim_fintech_risk_accuracy_80
+    statement: Detected loan segments with elevated default risk at 80% accuracy.
+    verification_status: needs_clarification
+    approved_for_application: false
+    reason: The README documents analytical gold tables rather than a predictive default-risk model, so
+      the accuracy metric is not yet traceable.
+  target_roles:
+  - Data Engineer
+  - Cloud Data Engineer
+  - Analytics Engineer
+  - AWS Data Engineer
+  repository_url: https://github.com/AIanumel2025/bank-data-pipeline
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  - source_documents/projects/README fintech.md
+  open_questions:
+  - Provide benchmark evidence for the reported 40% reduction.
+  - Clarify or remove the reported 80% loan-risk accuracy claim.
+- project_id: logos_sentiment_intelligence
+  name: 'logos_: Social Sentiment Intelligence System'
+  context: NLP and transformer portfolio project
+  status: developed
+  summary: A transformer-based social sentiment intelligence system comparing BERT, DistilBERT and Twitter-RoBERTa
+    on TweetEval sentiment classification.
+  dataset:
+    name: TweetEval sentiment dataset
+    classes:
+    - negative
+    - neutral
+    - positive
+    reported_training_distribution:
+      negative_percent: 16
+      neutral_percent: 45
+      positive_percent: 39
+  models:
+  - name: BERT
+    accuracy: 0.69
+    macro_f1: 0.69
+    macro_recall: 0.71
+  - name: Twitter-RoBERTa
+    accuracy: 0.7
+    macro_f1: 0.7
+    macro_recall: 0.73
+  - name: DistilBERT
+    accuracy: 0.68
+    macro_f1: 0.68
+    macro_recall: 0.69
+  methods:
+  - Transformer fine-tuning
+  - Tweet preprocessing
+  - WordPiece and byte-pair encoding comparison
+  - Confusion-matrix analysis
+  - Macro F1 and macro recall evaluation
+  technologies:
+  - Python
+  - PyTorch
+  - Hugging Face Transformers
+  - Pandas
+  - scikit-learn
+  - Streamlit
+  - Matplotlib
+  - Plotly
+  outcomes:
+  - claim_id: claim_logos_f1_070
+    statement: Twitter-RoBERTa achieved a macro F1 score of 0.70.
+    verification_status: source_supported
+  - claim_id: claim_logos_baseline_1pct
+    statement: The best model outperformed the stated baseline by approximately one percentage point.
+    verification_status: source_supported_needs_baseline_confirmation
+  target_roles:
+  - NLP Engineer
+  - AI Engineer
+  - Machine Learning Engineer
+  - Applied Data Scientist
+  repository_url: https://github.com/AIanumel2025/logos_
+  article_url: https://medium.com/@aanumel2025/teaching-machines-to-feel-tweets-bf06efb495f5
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  - source_documents/projects/README Sentiment.md
+  - source_documents/articles/Teaching Machines to “Feel” Tweets _ by Anthony Anumel _ Medium.pdf
+- project_id: world_mask_catalog_automation
+  name: World Mask Catalog Automation
+  context: Personal automation and cultural heritage project
+  status: live_at_time_of_article
+  summary: An automated content pipeline that selects the next unposted mask from an Excel catalog, pairs
+    it with an image and publishes a scheduled daily post to X.
+  architecture:
+  - Excel catalog as the structured content source and publication ledger.
+  - Python script selects the first record where Posted? is not Y.
+  - Script checks the corresponding image and prepares the post.
+  - Dry-run mode previews the selected mask, image, post and character count.
+  - The --live flag enables publication through the X API.
+  - GitHub Actions schedules the workflow.
+  - After successful publication, the script changes the record from N to Y and commits the updated catalog.
+  technologies:
+  - Excel
+  - Python
+  - X API
+  - Git
+  - GitHub
+  - GitHub Actions
+  outcomes:
+  - claim_id: claim_mask_catalog_30_entries
+    statement: Validated an initial catalog of 30 mask entries and their corresponding images.
+    verification_status: source_supported
+  - claim_id: claim_mask_catalog_daily_automation
+    statement: Built a scheduled, human-independent daily publishing workflow with dry-run safety controls.
+    verification_status: source_supported
+  target_roles:
+  - Automation Engineer
+  - Data Engineer
+  - AI Engineer
+  - Python Developer
+  repository_url: null
+  article_url: https://medium.com/@aanumel2025/a-daily-world-mask-catalog-that-posts-itself-750a4129866a
+  source_files:
+  - source_documents/articles/A Daily World Mask Catalog That Posts Itself _ by Anthony Anumel _ Jul,
+    2026 _ Medium.pdf
+  open_questions: []
+  repository_visibility: private_not_shareable
+- project_id: asthma_deterioration_intelligence
+  name: Asthma Deterioration Early-Warning Analysis
+  context: Applied machine learning and health analytics project
+  status: documented_in_article
+  summary: A predictive modelling analysis focused on identifying asthma deterioration while prioritising
+    sensitivity over headline accuracy in an imbalanced clinical dataset.
+  methods:
+  - Decision Tree
+  - Logistic Regression
+  - Random Forest
+  - Sensitivity-focused model selection
+  outcomes:
+  - claim_id: claim_asthma_rf_sensitivity_579
+    statement: Random Forest achieved 57.9% sensitivity for detecting deterioration.
+    verification_status: source_supported
+  - claim_id: claim_asthma_rf_accuracy_618
+    statement: Random Forest achieved 61.8% overall accuracy.
+    verification_status: source_supported
+  - claim_id: claim_asthma_majority_accuracy_86
+    statement: Majority-class-biased approaches could exceed 86% accuracy while missing nearly all deterioration
+      cases.
+    verification_status: source_supported
+  target_roles:
+  - Data Scientist
+  - Machine Learning Engineer
+  - Health Data Analyst
+  repository_url: https://github.com/AIanumel2025/Data-Science-Analytics-and-Insights-Portfolio/tree/main/data-science-projects/predictive-analytics-asthma
+  article_url: https://medium.com/@aanumel2025/turning-asthma-data-into-actionable-intelligence-a-national-level-solution-7c7211eb7513
+  source_files:
+  - source_documents/articles/Turning Asthma Data Into Actionable Intelligence_ A National Level Solution
+    _ by Anthony Anumel _ Medium.pdf
+  open_questions:
+  - Confirm whether the project was individual or team-based.
+  repository_visibility: public
+- project_id: markov_weibull_pavement_dissertation
+  name: Enhancing a Markov-Weibull Pavement Deterioration Model Using Machine Learning Transition Probabilities
+  context: MSc Artificial Intelligence thesis
+  status: in_progress_or_pending_confirmation
+  summary: Research into improving a Markov-Weibull pavement deterioration model using machine-learning-derived
+    transition probabilities.
+  methods:
+  - Markov-Weibull modelling
+  - Machine learning transition probabilities
+  technologies: []
+  outcomes: []
+  target_roles:
+  - Machine Learning Engineer
+  - Data Scientist
+  - Infrastructure Data Analyst
+  repository_url: null
+  source_files:
+  - source_documents/cv/anthony_anumel_ai.docx
+  open_questions:
+  - Confirm thesis status, dataset, algorithms, evaluation metrics, results and expected completion date.

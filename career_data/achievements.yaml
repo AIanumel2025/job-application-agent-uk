@@ -1,0 +1,184 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+
+claims:
+  - claim_id: claim_doc_intelligence_preprocessing_50
+    category: experience
+    statement: Improved data quality and preprocessing by approximately 50%.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_underlying_evidence
+    approved_for_application: true
+    recommended_wording: Improved document-data quality and preprocessing by approximately 50% during an AI engineering internship.
+
+  - claim_id: claim_doc_intelligence_position_80
+    category: experience
+    statement: Achieved approximately 80% positional accuracy in document-region detection.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_underlying_evidence
+    approved_for_application: true
+    recommended_wording: Implemented computer-vision region detection with approximately 80% positional accuracy.
+
+  - claim_id: claim_doc_intelligence_efficiency_75
+    category: experience
+    statement: Increased workflow efficiency by approximately 75% using AWS-backed data handling.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_underlying_evidence
+    approved_for_application: true
+    recommended_wording: Used Amazon S3 and Athena to improve data-handling workflow efficiency by approximately 75%.
+
+  - claim_id: claim_organai_accuracy_75
+    category: project
+    statement: Achieved approximately 75% accuracy on 11-class abdominal organ classification.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_underlying_evidence
+    approved_for_application: true
+
+  - claim_id: claim_organai_transfer_boost_30
+    category: project
+    statement: Transfer learning improved performance by approximately 30%.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: needs_baseline_definition
+    approved_for_application: false
+
+  - claim_id: claim_logos_f1_070
+    category: project
+    statement: Twitter-RoBERTa achieved a macro F1 score of 0.70.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+      - source_documents/projects/README Sentiment.md
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_logos_baseline_1pct
+    category: project
+    statement: The best sentiment model outperformed the stated baseline by one percentage point.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_baseline_confirmation
+    approved_for_application: true
+
+  - claim_id: claim_fintech_rows_4_2m
+    category: project
+    statement: Built a banking data pipeline processing more than 4.2 million records.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+      - source_documents/projects/README fintech.md
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_fintech_overhead_40
+    category: project
+    statement: Reduced data-storage and processing overhead by approximately 40%.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_underlying_evidence
+    approved_for_application: true
+
+  - claim_id: claim_fintech_risk_accuracy_80
+    category: project
+    statement: Detected elevated loan-default-risk segments at 80% accuracy.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: needs_clarification
+    approved_for_application: false
+    reason: No predictive risk model or evaluation method is described in the supplied FintechFlow README.
+
+  - claim_id: claim_gesture_pca_95
+    category: project
+    statement: PCA preserved approximately 95% of dataset variance while reducing feature-space complexity.
+    source_files:
+      - source_documents/cv/anthony_anumel_ai.docx
+    verification_status: source_supported_needs_underlying_evidence
+    approved_for_application: true
+
+  - claim_id: claim_gesture_knn_balanced
+    category: project
+    statement: KNN delivered the most balanced performance across five gesture phases.
+    source_files:
+      - source_documents/projects/README Gesture.md
+      - source_documents/articles/Choosing the Right Machine Learning Model When Your Data is Imbalanced _ by Anthony Anumel _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_gesture_rf_overall
+    category: project
+    statement: Random Forest was the strongest overall model for AUC and probability calibration.
+    source_files:
+      - source_documents/projects/README Gesture.md
+      - source_documents/articles/Choosing the Right Machine Learning Model When Your Data is Imbalanced _ by Anthony Anumel _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_mask_catalog_30_entries
+    category: project
+    statement: Validated 30 mask records and their corresponding images before live automation.
+    source_files:
+      - source_documents/articles/A Daily World Mask Catalog That Posts Itself _ by Anthony Anumel _ Jul, 2026 _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_mask_catalog_daily_automation
+    category: project
+    statement: Built a daily scheduled publishing workflow using Python, the X API and GitHub Actions.
+    source_files:
+      - source_documents/articles/A Daily World Mask Catalog That Posts Itself _ by Anthony Anumel _ Jul, 2026 _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_asthma_rf_sensitivity_579
+    category: project
+    statement: Random Forest achieved 57.9% sensitivity for detecting asthma deterioration.
+    source_files:
+      - source_documents/articles/Turning Asthma Data Into Actionable Intelligence_ A National Level Solution _ by Anthony Anumel _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_asthma_rf_accuracy_618
+    category: project
+    statement: Random Forest achieved 61.8% overall accuracy.
+    source_files:
+      - source_documents/articles/Turning Asthma Data Into Actionable Intelligence_ A National Level Solution _ by Anthony Anumel _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+
+  - claim_id: claim_asthma_majority_accuracy_86
+    category: project
+    statement: Majority-class-biased models could exceed 86% accuracy while missing nearly all asthma deterioration cases.
+    source_files:
+      - source_documents/articles/Turning Asthma Data Into Actionable Intelligence_ A National Level Solution _ by Anthony Anumel _ Medium.pdf
+    verification_status: source_supported
+    approved_for_application: true
+    recommended_wording: Demonstrated why headline accuracy can be misleading in imbalanced clinical data, where models exceeding 86% accuracy still failed to identify most deterioration cases.
+
+  - claim_id: claim_microsoft_power_bi_certified
+    category: certification
+    statement: 'Microsoft Certified: Power BI Data Analyst Associate.'
+    source_files:
+      - source_documents/certifications/Credentials - tonyanumel-2360 _ Microsoft Learn.pdf
+    verification_status: verified_credential
+    approved_for_application: true
+
+  - claim_id: claim_aws_academy_data_engineering
+    category: certification
+    statement: Completed the 40-hour AWS Academy Graduate - Data Engineering programme.
+    source_files:
+      - source_documents/certifications/AWS_Academy_Graduate___Data_Engineering___Training_Badge_Badge20260729-9-i4l86.pdf
+    verification_status: verified_credential_and_user_confirmation
+    approved_for_application: true
+
+policy:
+  allowed_statuses:
+    - verified_credential
+    - verified_credential_and_user_confirmation
+    - source_supported
+    - source_supported_needs_underlying_evidence
+    - source_supported_needs_baseline_confirmation
+    - needs_baseline_definition
+    - needs_clarification
+  generation_rule: The application generator must never use a claim where approved_for_application is false.

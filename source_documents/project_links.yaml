@@ -1,0 +1,61 @@
+schema_version: '1.0'
+generated_on: '2026-07-29'
+status: provisional_pending_user_confirmation
+owner: Anthony L. Anumel
+github_profile: https://github.com/AIanumel2025
+projects:
+- project_id: document_intelligence_etl_pipeline
+  project_name: Document Intelligence ETL Pipeline
+  repository_url: null
+  repository_scope: confidential
+  local_readme: source_documents/projects/README document intelligence.md
+  status: not_shareable_due_to_nda
+  notes: Repository cannot be disclosed because the work is covered by an NDA. Use approved project descriptions
+    only.
+- project_id: organai_medical_image_classification
+  project_name: 'OrganAI: Abdominal Organ Classification from CT Scans'
+  repository_url: https://github.com/AIanumel2025/machine_deep-learning-portfolio
+  repository_scope: subproject_or_notebook_within_portfolio
+  repository_path: null
+  local_readme: source_documents/projects/README dl.md
+  status: repository_confirmed_path_needed
+- project_id: gesture_phase_segmentation
+  project_name: Gesture Phase Segmentation
+  repository_url: https://github.com/AIanumel2025/machine_deep-learning-portfolio
+  repository_scope: subproject_or_notebook_within_portfolio
+  repository_path: null
+  local_readme: source_documents/projects/README Gesture.md
+  status: repository_confirmed_path_needed
+- project_id: fintechflow_banking_data_pipeline
+  project_name: 'FintechFlow: Banking Data Pipeline on AWS'
+  repository_url: https://github.com/AIanumel2025/bank-data-pipeline
+  repository_scope: full_repository
+  local_readme: source_documents/projects/README fintech.md
+  status: confirmed
+- project_id: logos_sentiment_intelligence
+  project_name: 'logos_: Social Sentiment Intelligence System'
+  repository_url: https://github.com/AIanumel2025/logos_
+  repository_scope: full_repository
+  local_readme: source_documents/projects/README Sentiment.md
+  status: confirmed
+- project_id: world_mask_catalog_automation
+  project_name: World Mask Catalog Automation
+  repository_url: null
+  repository_scope: private
+  local_readme: null
+  status: not_shareable
+  article_id: article_world_mask_catalog
+  notes: Repository exists but cannot be shared. Use the public Medium article as evidence.
+- project_id: asthma_deterioration_intelligence
+  project_name: Asthma Deterioration Early-Warning Analysis
+  repository_url: https://github.com/AIanumel2025/Data-Science-Analytics-and-Insights-Portfolio/tree/main/data-science-projects/predictive-analytics-asthma
+  repository_scope: subproject_within_portfolio
+  local_readme: null
+  status: confirmed
+  article_id: article_asthma_intelligence
+- project_id: markov_weibull_pavement_dissertation
+  project_name: Machine-Learning-Enhanced Markov-Weibull Pavement Deterioration Model
+  repository_url: null
+  repository_scope: academic_thesis
+  local_readme: null
+  status: repository_not_expected_or_not_provided
