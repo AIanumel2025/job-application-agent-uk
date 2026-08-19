@@ -34,7 +34,11 @@ def build_application_pack(
     match: JobMatchResult,
 ) -> ApplicationPack:
     evidence = select_evidence(profile.evidence, match)
+
+    # Phase 5.1: CV tailoring now starts from the registered structural master
+    # and may reuse only wording that maps back to approved career_data evidence.
     cv = tailor_cv(profile, match, evidence)
+
     cover_letter = generate_cover_letter(profile, match, evidence)
     answers = generate_standard_answers(profile, match, evidence)
 
@@ -59,7 +63,10 @@ def build_application_pack(
         maximum_words=550,
     )
 
-    blocked = any(str(item.status) == "blocked" for item in claim_checks)
+    blocked = any(
+        str(item.status) == "blocked"
+        for item in claim_checks
+    )
     quality_failed = not cv_quality.passed or not cover_quality.passed
 
     if blocked:
@@ -81,6 +88,7 @@ def build_application_pack(
         f"## {match.job_title} at {match.company}",
         "",
     ]
+
     for item in evidence:
         if str(item.decision) in {"selected", "review_required"}:
             interview_lines.extend(
@@ -124,5 +132,6 @@ def build_application_pack(
             "match_id": str(match.match_id),
             "final_score": match.final_score,
             "recommendation": str(match.recommendation),
+            "cv_template_integration": "phase_5_1",
         },
     )

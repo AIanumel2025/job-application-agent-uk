@@ -103,7 +103,10 @@ def score_stored_jobs(
             requirements,
             profile,
         )
-        preference_result = assess_preference_fit(job, profile)
+        preference_result = assess_preference_fit(
+            job,
+            profile,
+        )
 
         score_breakdown = calculate_match_score(
             skill_result=skill_result,
@@ -161,9 +164,15 @@ def score_stored_jobs(
             else None
         )
 
-    ranking_report = rank_jobs(results, closing_dates)
+    ranking_report = rank_jobs(
+        results,
+        closing_dates,
+    )
 
-    json_path.parent.mkdir(parents=True, exist_ok=True)
+    json_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
     json_path.write_text(
         json.dumps(
             {
@@ -179,8 +188,15 @@ def score_stored_jobs(
         encoding="utf-8",
     )
 
-    csv_path.parent.mkdir(parents=True, exist_ok=True)
-    with csv_path.open("w", newline="", encoding="utf-8") as handle:
+    csv_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    with csv_path.open(
+        "w",
+        newline="",
+        encoding="utf-8",
+    ) as handle:
         writer = csv.DictWriter(
             handle,
             fieldnames=[
@@ -200,16 +216,29 @@ def score_stored_jobs(
         writer.writeheader()
 
         for item in ranking_report.ranked_jobs:
-            writer.writerow(item.model_dump(mode="json"))
+            row = item.model_dump(mode="json")
+            writer.writerow(
+                {
+                    field: row.get(field)
+                    for field in writer.fieldnames
+                }
+            )
 
     return results
 
 
-def print_results(results: list[JobMatchResult]) -> None:
-    table = Table(title="Job match results")
+def print_results(
+    results: list[JobMatchResult],
+) -> None:
+    table = Table(
+        title="Job match results",
+    )
     table.add_column("Company")
     table.add_column("Role")
-    table.add_column("Score", justify="right")
+    table.add_column(
+        "Score",
+        justify="right",
+    )
     table.add_column("Recommendation")
     table.add_column("Eligibility")
 
@@ -233,11 +262,26 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Score and rank jobs stored in data/jobs.db."
     )
-    parser.add_argument("--root", dest="repository_root")
-    parser.add_argument("--db", dest="db_path")
-    parser.add_argument("--json-report", dest="json_report_path")
-    parser.add_argument("--csv-report", dest="csv_report_path")
-    parser.add_argument("--quiet", action="store_true")
+    parser.add_argument(
+        "--root",
+        dest="repository_root",
+    )
+    parser.add_argument(
+        "--db",
+        dest="db_path",
+    )
+    parser.add_argument(
+        "--json-report",
+        dest="json_report_path",
+    )
+    parser.add_argument(
+        "--csv-report",
+        dest="csv_report_path",
+    )
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+    )
     return parser
 
 

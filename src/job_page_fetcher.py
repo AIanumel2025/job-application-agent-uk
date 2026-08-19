@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import gzip
+import ssl
 import time
 from datetime import datetime, timezone
 from typing import Mapping
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+import certifi
 
 from src.job_models import (
     FetchStatus,
@@ -28,6 +31,16 @@ ALLOWED_CONTENT_TYPES = {
     "text/html",
     "application/xhtml+xml",
 }
+
+
+def _ssl_context() -> ssl.SSLContext:
+    """Return a TLS context backed by certifi's maintained CA bundle.
+
+    This avoids relying on a machine-specific Python/macOS certificate setup,
+    which makes local runs and CI environments more consistent.
+    """
+
+    return ssl.create_default_context(cafile=certifi.where())
 
 
 def _decode_response_body(
@@ -85,7 +98,11 @@ def fetch_job_page(
     started = time.perf_counter()
 
     try:
-        with urlopen(request, timeout=timeout_seconds) as response:
+        with urlopen(
+            request,
+            timeout=timeout_seconds,
+            context=_ssl_context(),
+        ) as response:
             elapsed_ms = int((time.perf_counter() - started) * 1000)
             status_code = getattr(response, "status", None) or response.getcode()
             final_url = response.geturl()

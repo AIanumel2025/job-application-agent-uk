@@ -1,0 +1,103 @@
+version: 1
+factual_source_of_truth: career_data/
+policy:
+  cv_documents_are_factual_authority: false
+  allow_reference_wording: true
+  require_claim_verification_against_career_data: true
+  allow_unverified_metrics: false
+  allow_confidential_content: false
+  human_review_required_before_submission: true
+documents:
+  plain_master_template:
+    file: plain_master_template.docx
+    document_type: master_template
+    status: active
+    role_families:
+    - ai_engineering
+    - machine_learning_engineering
+    - data_engineering
+    - data_science
+    - data_analytics
+    - data_quality
+    uses:
+    - document_structure
+    - section_order
+    - formatting_reference
+    - tailoring_framework
+    wording_source: false
+    factual_authority: false
+    notes: Use as the default structural base. Placeholder text and specific claims
+      or metrics must never be accepted as facts unless verified against career_data.
+  anthony_anumel_ai:
+    file: anthony_anumel_ai.docx
+    document_type: reference_cv
+    status: active
+    priority: 1
+    role_families:
+    - ai_engineering
+    - machine_learning_engineering
+    - applied_ai
+    - nlp_engineering
+    - computer_vision
+    - mlops
+    uses:
+    - approved_wording_reference
+    - experience_bullet_reference
+    - project_wording_reference
+    - technical_skill_reference
+    wording_source: true
+    factual_authority: false
+    notes: Primary wording reference for AI/ML-oriented applications. All claims must
+      still be checked against career_data.
+  anthony_anumel_data_ai:
+    file: anthony_anumel_data_ai.docx
+    document_type: reference_cv
+    status: active
+    priority: 1
+    role_families:
+    - data_engineering
+    - data_analytics
+    - data_quality
+    - business_intelligence
+    - analytics_engineering
+    - data_governance
+    uses:
+    - approved_wording_reference
+    - experience_bullet_reference
+    - project_wording_reference
+    - data_quality_wording_reference
+    - technical_skill_reference
+    wording_source: true
+    factual_authority: false
+    notes: Primary wording reference for data, analytics, BI, and data-quality applications.
+      Claims remain subordinate to career_data.
+  cv_anumel_teach:
+    file: CV_Anumel_teach.docx
+    document_type: reference_cv
+    status: active
+    priority: 1
+    role_families:
+    - teaching
+    - education
+    - tutoring
+    - learning_support
+    - education_technology
+    uses:
+    - approved_wording_reference
+    - teaching_experience_reference
+    - education_skill_reference
+    wording_source: true
+    factual_authority: false
+    notes: Use only for education-related roles or when teaching and communication
+      experience is directly relevant.
+selection_rules:
+  default_master_template: plain_master_template
+  prefer_role_family_match: true
+  prefer_priority_1_reference: true
+  allow_multiple_reference_cvs: true
+  maximum_reference_cvs_per_application: 2
+  fallback_behavior: Use the master template and verified career_data only when no
+    suitable reference CV matches the target role family.
+excluded_files:
+- .DS_Store
+- read_csv1_Anumel.docx
