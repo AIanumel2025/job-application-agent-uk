@@ -5,3 +5,5 @@ rich==14.1.0
 python-dateutil==2.9.0.post0
 certifi
 python-docx
+fastapi
+uvicorn[standard]
