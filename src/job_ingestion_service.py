@@ -23,6 +23,8 @@ def ingest_job_url(
     url: str,
     source: JobSource = JobSource.MANUAL,
     notes: str | None = None,
+    company_hint: str | None = None,
+    source_job_id_hint: str | None = None,
     timeout_seconds: int = 20,
     max_bytes: int = 5_000_000,
     database: PostgresJobDatabase | None = None,
@@ -70,7 +72,11 @@ def ingest_job_url(
         return run
 
     try:
-        parsed = parse_job_page(fetched)
+        parsed = parse_job_page(
+    fetched,
+    company_hint=company_hint,
+    source_job_id_hint=source_job_id_hint,
+)
         normalised = normalise_parsed_job(parsed)
 
     except Exception as exc:

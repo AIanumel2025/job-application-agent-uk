@@ -49,7 +49,9 @@ class QualitySeverity(StrEnum):
 class ApplicationPackStatus(StrEnum):
     DRAFT = "draft"
     REVIEW_REQUIRED = "review_required"
+    CHANGES_REQUESTED = "changes_requested"
     APPROVED = "approved"
+    REJECTED = "rejected"
     BLOCKED = "blocked"
 
 
@@ -178,6 +180,19 @@ class ApplicationPackManifest(ApplicationModel):
     quality_results: list[DocumentQualityResult] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
     human_review_required: bool = True
+    review_notes: list[str] = Field(
+    default_factory=list
+    )
+
+    reviewed_at: datetime | None = None
+
+    regeneration_count: int = Field(
+    default=0,
+    ge=0,
+
+    )
+
+    last_regenerated_at: datetime | None = None
 
     @model_validator(mode="after")
     def blocked_claims_block_pack(self) -> "ApplicationPackManifest":

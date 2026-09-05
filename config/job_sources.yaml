@@ -32,9 +32,15 @@ sources:
 
   ashby:
     enabled: true
-    parser_priority:
-      - json_ld_job_posting
-      - generic_html
+
+    boards:
+      - token: Distyl
+        company: Distyl AI
+        enabled: true
+
+      - token: DiffractiveLabs
+        company: Diffractive Labs
+        enabled: true
 
   smartrecruiters:
     enabled: true
@@ -76,3 +82,47 @@ deduplication:
 storage:
   database_path: "data/jobs.db"
   report_path: "reports/job_ingestion_report.json"
+
+discovery:
+  greenhouse:
+    enabled: true
+    boards:
+      - token: graphcore
+        company: Graphcore
+        enabled: true
+
+      - token: physicsx
+        company: PhysicsX
+        enabled: true
+
+  lever:
+    enabled: true
+    sites:
+      - token: palantir
+        company: Palantir
+        enabled: true
+
+  ashby:
+    enabled: true
+    boards:
+      - token: Distyl
+        company: Distyl AI
+        enabled: true
+
+      - token: DiffractiveLabs
+        company: Diffractive Labs
+        enabled: true
+        
+  workable:
+    enabled: true
+    sites:
+      - url: "https://apply.workable.com/justpark/"
+        company: JustPark
+        enabled: true
+
+  smartrecruiters:
+    enabled: true
+    companies:
+      - identifier: AECOM2
+        company: AECOM
+        enabled: true

@@ -18,10 +18,20 @@ class DeduplicationResult:
     all_matches: list[DuplicateMatch] = field(default_factory=list)
 
 
-def _similarity(left: str | None, right: str | None) -> float:
+def _similarity(
+    left: str | None,
+    right: str | None,
+) -> float:
+    """Return a case-insensitive similarity score between two strings."""
+
     if not left or not right:
         return 0.0
-    return SequenceMatcher(None, left.lower(), right.lower()).ratio()
+
+    return SequenceMatcher(
+        None,
+        left.lower(),
+        right.lower(),
+    ).ratio()
 
 
 def compare_jobs(
@@ -33,10 +43,12 @@ def compare_jobs(
     matching_fields: list[str] = []
     scores: list[float] = []
 
+    # Exact canonical URL match.
     if incoming.canonical_url == existing.canonical_url:
         matching_fields.append("canonical_url")
         scores.append(1.0)
 
+    # Exact source job ID match.
     if (
         incoming.source_job_id
         and existing.source_job_id
@@ -46,6 +58,8 @@ def compare_jobs(
         matching_fields.append("source_job_id")
         scores.append(1.0)
 
+    # Description hashes are useful evidence, but a matching hash alone
+    # must not be allowed to declare two differently titled jobs duplicates.
     if (
         incoming.description_hash
         and existing.description_hash
@@ -58,6 +72,7 @@ def compare_jobs(
         incoming.company_normalised,
         existing.company_normalised,
     )
+
     title_score = _similarity(
         incoming.title_normalised,
         existing.title_normalised,
@@ -71,19 +86,57 @@ def compare_jobs(
         matching_fields.append("title")
         scores.append(title_score)
 
-    incoming_city = incoming.location.city if incoming.location else None
-    existing_city = existing.location.city if existing.location else None
-    city_score = _similarity(incoming_city, existing_city)
+    incoming_city = (
+        incoming.location.city
+        if incoming.location
+        else None
+    )
+
+    existing_city = (
+        existing.location.city
+        if existing.location
+        else None
+    )
+
+    city_score = _similarity(
+        incoming_city,
+        existing_city,
+    )
 
     if city_score >= 0.90:
         matching_fields.append("location")
         scores.append(city_score)
 
-    exact_signal = any(
+    # Canonical URL and source job ID are true identity signals.
+    exact_identity_signal = any(
         field in matching_fields
-        for field in ("canonical_url", "source_job_id", "description_hash")
+        for field in (
+            "canonical_url",
+            "source_job_id",
+        )
     )
 
+    # A matching description hash only becomes a duplicate signal
+    # when company and title are also strongly similar.
+    description_match = (
+        incoming.description_hash
+        and existing.description_hash
+        and incoming.description_hash == existing.description_hash
+    )
+
+    description_supported_signal = (
+        bool(description_match)
+        and company_score >= 0.92
+        and title_score >= 0.88
+    )
+
+    exact_signal = (
+        exact_identity_signal
+        or description_supported_signal
+    )
+
+    # Near-duplicate fallback:
+    # same company, highly similar title, and compatible location.
     strong_composite = (
         company_score >= 0.92
         and title_score >= 0.88
@@ -97,8 +150,17 @@ def compare_jobs(
     if not exact_signal and not strong_composite:
         return None
 
-    if exact_signal:
+    if exact_identity_signal:
         confidence = 1.0
+        reason = "exact URL or source job ID match"
+
+    elif description_supported_signal:
+        confidence = 1.0
+        reason = (
+            "matching description with strong company "
+            "and title similarity"
+        )
+
     else:
         confidence = round(
             (company_score * 0.4)
@@ -107,11 +169,9 @@ def compare_jobs(
             4,
         )
 
-    reason = (
-        "exact duplicate signal"
-        if exact_signal
-        else "strong company, title, and location similarity"
-    )
+        reason = (
+            "strong company, title, and location similarity"
+        )
 
     return DuplicateMatch(
         incoming_job_id=incoming.job_id,
@@ -131,11 +191,18 @@ def find_duplicate(
     matches: list[DuplicateMatch] = []
 
     for existing in existing_jobs:
-        match = compare_jobs(incoming, existing)
+        match = compare_jobs(
+            incoming,
+            existing,
+        )
+
         if match is not None:
             matches.append(match)
 
-    matches.sort(key=lambda item: item.confidence, reverse=True)
+    matches.sort(
+        key=lambda item: item.confidence,
+        reverse=True,
+    )
 
     return DeduplicationResult(
         is_duplicate=bool(matches),

@@ -13,6 +13,9 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine, RowMapping
 
+from src.application_lifecycle_models import (
+    ApplicationLifecycleRecord,
+)
 from src.job_models import (
     IngestionRun,
     JobLocation,
@@ -129,6 +132,23 @@ class PostgresJobDatabase:
                 results_json JSONB NOT NULL
             )
             """,
+            """
+            CREATE TABLE IF NOT EXISTS application_lifecycles (
+                lifecycle_id TEXT PRIMARY KEY,
+                job_id TEXT NOT NULL UNIQUE,
+                current_status TEXT NOT NULL,
+                application_url TEXT,
+                created_at TIMESTAMPTZ NOT NULL,
+                updated_at TIMESTAMPTZ NOT NULL,
+                submitted_at TIMESTAMPTZ,
+                notes_json JSONB NOT NULL,
+                history_json JSONB NOT NULL
+            )
+            """,
+            """
+            CREATE INDEX IF NOT EXISTS idx_application_lifecycles_status
+                ON application_lifecycles(current_status)
+            """,
         ]
 
         with self.engine.begin() as conn:
@@ -147,7 +167,10 @@ class PostgresJobDatabase:
                 {"value": str(SCHEMA_VERSION)},
             )
 
-    def insert_job(self, job: NormalisedJob) -> None:
+    def insert_job(
+        self,
+        job: NormalisedJob,
+    ) -> None:
         now = datetime.now(timezone.utc)
 
         sql = text(
@@ -186,11 +209,23 @@ class PostgresJobDatabase:
         )
 
         with self.engine.begin() as conn:
-            conn.execute(sql, self._job_to_params(job, now))
+            conn.execute(
+                sql,
+                self._job_to_params(
+                    job,
+                    now,
+                ),
+            )
 
-    def update_job(self, job: NormalisedJob) -> None:
+    def update_job(
+        self,
+        job: NormalisedJob,
+    ) -> None:
         now = datetime.now(timezone.utc)
-        params = self._job_to_params(job, now)
+        params = self._job_to_params(
+            job,
+            now,
+        )
 
         sql = text(
             """
@@ -232,10 +267,15 @@ class PostgresJobDatabase:
         )
 
         with self.engine.begin() as conn:
-            result = conn.execute(sql, params)
+            result = conn.execute(
+                sql,
+                params,
+            )
 
         if result.rowcount == 0:
-            raise KeyError(f"job does not exist: {job.job_id}")
+            raise KeyError(
+                f"job does not exist: {job.job_id}"
+            )
 
     def get_job(
         self,
@@ -251,13 +291,19 @@ class PostgresJobDatabase:
                         WHERE job_id = :job_id
                         """
                     ),
-                    {"job_id": str(job_id)},
+                    {
+                        "job_id": str(job_id)
+                    },
                 )
                 .mappings()
                 .first()
             )
 
-        return self._row_to_job(row) if row else None
+        return (
+            self._row_to_job(row)
+            if row
+            else None
+        )
 
     def get_job_by_canonical_url(
         self,
@@ -273,13 +319,19 @@ class PostgresJobDatabase:
                         WHERE canonical_url = :canonical_url
                         """
                     ),
-                    {"canonical_url": canonical_url},
+                    {
+                        "canonical_url": canonical_url
+                    },
                 )
                 .mappings()
                 .first()
             )
 
-        return self._row_to_job(row) if row else None
+        return (
+            self._row_to_job(row)
+            if row
+            else None
+        )
 
     def list_jobs(
         self,
@@ -304,35 +356,258 @@ class PostgresJobDatabase:
                 LIMIT :limit
                 """
             )
-            params = {"limit": limit}
+            params = {
+                "limit": limit
+            }
 
         with self.engine.connect() as conn:
-            rows = conn.execute(
-                sql,
-                params,
-            ).mappings().all()
+            rows = (
+                conn.execute(
+                    sql,
+                    params,
+                )
+                .mappings()
+                .all()
+            )
 
         return [
             self._row_to_job(row)
             for row in rows
         ]
 
-    def count_jobs(self) -> int:
+    def count_jobs(
+        self,
+    ) -> int:
         with self.engine.connect() as conn:
             count = conn.execute(
-                text("SELECT COUNT(*) FROM jobs")
+                text(
+                    "SELECT COUNT(*) FROM jobs"
+                )
             ).scalar_one()
 
         return int(count)
+
+    def save_application_lifecycle(
+        self,
+        record: ApplicationLifecycleRecord,
+    ) -> None:
+        payload = record.model_dump(
+            mode="json"
+        )
+
+        params = {
+            "lifecycle_id": str(
+                record.lifecycle_id
+            ),
+            "job_id": str(
+                record.job_id
+            ),
+            "current_status": str(
+                record.current_status
+            ),
+            "application_url": (
+                str(record.application_url)
+                if record.application_url
+                else None
+            ),
+            "created_at": record.created_at,
+            "updated_at": record.updated_at,
+            "submitted_at": record.submitted_at,
+            "notes_json": json.dumps(
+                payload["notes"]
+            ),
+            "history_json": json.dumps(
+                payload["history"]
+            ),
+        }
+
+        with self.engine.begin() as conn:
+            conn.execute(
+                text(
+                    """
+                    INSERT INTO application_lifecycles (
+                        lifecycle_id,
+                        job_id,
+                        current_status,
+                        application_url,
+                        created_at,
+                        updated_at,
+                        submitted_at,
+                        notes_json,
+                        history_json
+                    ) VALUES (
+                        :lifecycle_id,
+                        :job_id,
+                        :current_status,
+                        :application_url,
+                        :created_at,
+                        :updated_at,
+                        :submitted_at,
+                        CAST(:notes_json AS JSONB),
+                        CAST(:history_json AS JSONB)
+                    )
+                    ON CONFLICT(job_id)
+                    DO UPDATE SET
+                        current_status =
+                            EXCLUDED.current_status,
+                        application_url =
+                            EXCLUDED.application_url,
+                        updated_at =
+                            EXCLUDED.updated_at,
+                        submitted_at =
+                            EXCLUDED.submitted_at,
+                        notes_json =
+                            EXCLUDED.notes_json,
+                        history_json =
+                            EXCLUDED.history_json
+                    """
+                ),
+                params,
+            )
+
+    def get_application_lifecycle(
+        self,
+        job_id: UUID | str,
+    ) -> ApplicationLifecycleRecord | None:
+        with self.engine.connect() as conn:
+            row = (
+                conn.execute(
+                    text(
+                        """
+                        SELECT *
+                        FROM application_lifecycles
+                        WHERE job_id = :job_id
+                        """
+                    ),
+                    {
+                        "job_id": str(job_id)
+                    },
+                )
+                .mappings()
+                .first()
+            )
+
+        if row is None:
+            return None
+
+        return ApplicationLifecycleRecord(
+            lifecycle_id=row[
+                "lifecycle_id"
+            ],
+            job_id=row[
+                "job_id"
+            ],
+            current_status=row[
+                "current_status"
+            ],
+            application_url=row[
+                "application_url"
+            ],
+            created_at=row[
+                "created_at"
+            ],
+            updated_at=row[
+                "updated_at"
+            ],
+            submitted_at=row[
+                "submitted_at"
+            ],
+            notes=list(
+                row["notes_json"]
+                or []
+            ),
+            history=list(
+                row["history_json"]
+                or []
+            ),
+        )
+
+    def list_application_lifecycles(
+        self,
+        *,
+        status: str | None = None,
+    ) -> list[ApplicationLifecycleRecord]:
+        if status is None:
+            sql = text(
+                """
+                SELECT *
+                FROM application_lifecycles
+                ORDER BY updated_at DESC
+                """
+            )
+
+            params: dict[str, Any] = {}
+        else:
+            sql = text(
+                """
+                SELECT *
+                FROM application_lifecycles
+                WHERE current_status = :status
+                ORDER BY updated_at DESC
+                """
+            )
+
+            params = {
+                "status": status
+            }
+
+        with self.engine.connect() as conn:
+            rows = (
+                conn.execute(
+                    sql,
+                    params,
+                )
+                .mappings()
+                .all()
+            )
+
+        return [
+            ApplicationLifecycleRecord(
+                lifecycle_id=row[
+                    "lifecycle_id"
+                ],
+                job_id=row[
+                    "job_id"
+                ],
+                current_status=row[
+                    "current_status"
+                ],
+                application_url=row[
+                    "application_url"
+                ],
+                created_at=row[
+                    "created_at"
+                ],
+                updated_at=row[
+                    "updated_at"
+                ],
+                submitted_at=row[
+                    "submitted_at"
+                ],
+                notes=list(
+                    row["notes_json"]
+                    or []
+                ),
+                history=list(
+                    row["history_json"]
+                    or []
+                ),
+            )
+            for row in rows
+        ]
 
     def save_ingestion_run(
         self,
         run: IngestionRun,
     ) -> None:
-        payload = run.model_dump(mode="json")
+        payload = run.model_dump(
+            mode="json"
+        )
 
         params = {
-            "run_id": str(run.run_id),
+            "run_id": str(
+                run.run_id
+            ),
             "started_at": run.started_at,
             "completed_at": run.completed_at,
             "input_count": run.input_count,
@@ -343,7 +618,9 @@ class PostgresJobDatabase:
             "duplicate_count": run.duplicate_count,
             "skipped_count": run.skipped_count,
             "failed_count": run.failed_count,
-            "results_json": json.dumps(payload["results"]),
+            "results_json": json.dumps(
+                payload["results"]
+            ),
         }
 
         with self.engine.begin() as conn:
@@ -351,28 +628,54 @@ class PostgresJobDatabase:
                 text(
                     """
                     INSERT INTO ingestion_runs (
-                        run_id, started_at, completed_at, input_count,
-                        fetched_count, parsed_count, inserted_count,
-                        updated_count, duplicate_count, skipped_count,
-                        failed_count, results_json
+                        run_id,
+                        started_at,
+                        completed_at,
+                        input_count,
+                        fetched_count,
+                        parsed_count,
+                        inserted_count,
+                        updated_count,
+                        duplicate_count,
+                        skipped_count,
+                        failed_count,
+                        results_json
                     ) VALUES (
-                        :run_id, :started_at, :completed_at, :input_count,
-                        :fetched_count, :parsed_count, :inserted_count,
-                        :updated_count, :duplicate_count, :skipped_count,
-                        :failed_count, CAST(:results_json AS JSONB)
+                        :run_id,
+                        :started_at,
+                        :completed_at,
+                        :input_count,
+                        :fetched_count,
+                        :parsed_count,
+                        :inserted_count,
+                        :updated_count,
+                        :duplicate_count,
+                        :skipped_count,
+                        :failed_count,
+                        CAST(:results_json AS JSONB)
                     )
                     ON CONFLICT(run_id)
                     DO UPDATE SET
-                        completed_at = EXCLUDED.completed_at,
-                        input_count = EXCLUDED.input_count,
-                        fetched_count = EXCLUDED.fetched_count,
-                        parsed_count = EXCLUDED.parsed_count,
-                        inserted_count = EXCLUDED.inserted_count,
-                        updated_count = EXCLUDED.updated_count,
-                        duplicate_count = EXCLUDED.duplicate_count,
-                        skipped_count = EXCLUDED.skipped_count,
-                        failed_count = EXCLUDED.failed_count,
-                        results_json = EXCLUDED.results_json
+                        completed_at =
+                            EXCLUDED.completed_at,
+                        input_count =
+                            EXCLUDED.input_count,
+                        fetched_count =
+                            EXCLUDED.fetched_count,
+                        parsed_count =
+                            EXCLUDED.parsed_count,
+                        inserted_count =
+                            EXCLUDED.inserted_count,
+                        updated_count =
+                            EXCLUDED.updated_count,
+                        duplicate_count =
+                            EXCLUDED.duplicate_count,
+                        skipped_count =
+                            EXCLUDED.skipped_count,
+                        failed_count =
+                            EXCLUDED.failed_count,
+                        results_json =
+                            EXCLUDED.results_json
                     """
                 ),
                 params,
@@ -384,41 +687,91 @@ class PostgresJobDatabase:
         now: datetime,
     ) -> dict[str, Any]:
         return {
-            "job_id": str(job.job_id),
-            "source": str(job.source),
-            "source_job_id": job.source_job_id,
-            "application_url": str(job.application_url),
-            "canonical_url": job.canonical_url,
+            "job_id": str(
+                job.job_id
+            ),
+            "source": str(
+                job.source
+            ),
+            "source_job_id": (
+                job.source_job_id
+            ),
+            "application_url": str(
+                job.application_url
+            ),
+            "canonical_url": (
+                job.canonical_url
+            ),
             "title": job.title,
-            "title_normalised": job.title_normalised,
+            "title_normalised": (
+                job.title_normalised
+            ),
             "company": job.company,
-            "company_normalised": job.company_normalised,
+            "company_normalised": (
+                job.company_normalised
+            ),
             "location_json": json.dumps(
-                job.location.model_dump(mode="json")
+                job.location.model_dump(
+                    mode="json"
+                )
             ),
             "salary_json": (
-                json.dumps(job.salary.model_dump(mode="json"))
+                json.dumps(
+                    job.salary.model_dump(
+                        mode="json"
+                    )
+                )
                 if job.salary
                 else None
             ),
-            "employment_types_json": json.dumps(job.employment_types),
-            "sponsorship_status": str(job.sponsorship_status),
+            "employment_types_json": json.dumps(
+                job.employment_types
+            ),
+            "sponsorship_status": str(
+                job.sponsorship_status
+            ),
             "sponsorship_evidence_json": json.dumps(
                 job.sponsorship_evidence
             ),
-            "description": job.description,
-            "responsibilities_json": json.dumps(job.responsibilities),
-            "requirements_json": json.dumps(job.requirements),
-            "preferred_skills_json": json.dumps(job.preferred_skills),
-            "benefits_json": json.dumps(job.benefits),
-            "posted_date": job.posted_date,
-            "closing_date": job.closing_date,
-            "date_found": job.date_found,
-            "status": str(job.status),
-            "description_hash": job.description_hash,
-            "deduplication_key": job.deduplication_key,
-            "recruiter_name": job.recruiter_name,
-            "recruiter_email": job.recruiter_email,
+            "description": (
+                job.description
+            ),
+            "responsibilities_json": json.dumps(
+                job.responsibilities
+            ),
+            "requirements_json": json.dumps(
+                job.requirements
+            ),
+            "preferred_skills_json": json.dumps(
+                job.preferred_skills
+            ),
+            "benefits_json": json.dumps(
+                job.benefits
+            ),
+            "posted_date": (
+                job.posted_date
+            ),
+            "closing_date": (
+                job.closing_date
+            ),
+            "date_found": (
+                job.date_found
+            ),
+            "status": str(
+                job.status
+            ),
+            "description_hash": (
+                job.description_hash
+            ),
+            "deduplication_key": (
+                job.deduplication_key
+            ),
+            "recruiter_name": (
+                job.recruiter_name
+            ),
+            "recruiter_email": (
+                job.recruiter_email
+            ),
             "raw_source_data_json": json.dumps(
                 job.raw_source_data,
                 default=str,
@@ -428,64 +781,132 @@ class PostgresJobDatabase:
         }
 
     @staticmethod
-    def _json_value(value: Any) -> Any:
-        if isinstance(value, str):
-            return json.loads(value)
+    def _json_value(
+        value: Any,
+    ) -> Any:
+        if isinstance(
+            value,
+            str,
+        ):
+            return json.loads(
+                value
+            )
+
         return value
 
     def _row_to_job(
         self,
         row: RowMapping,
     ) -> NormalisedJob:
-        salary_raw = self._json_value(row["salary_json"])
+        salary_raw = self._json_value(
+            row["salary_json"]
+        )
 
         return NormalisedJob(
-            job_id=row["job_id"],
-            source=row["source"],
-            source_job_id=row["source_job_id"],
-            application_url=row["application_url"],
-            canonical_url=row["canonical_url"],
-            title=row["title"],
-            title_normalised=row["title_normalised"],
-            company=row["company"],
-            company_normalised=row["company_normalised"],
+            job_id=row[
+                "job_id"
+            ],
+            source=row[
+                "source"
+            ],
+            source_job_id=row[
+                "source_job_id"
+            ],
+            application_url=row[
+                "application_url"
+            ],
+            canonical_url=row[
+                "canonical_url"
+            ],
+            title=row[
+                "title"
+            ],
+            title_normalised=row[
+                "title_normalised"
+            ],
+            company=row[
+                "company"
+            ],
+            company_normalised=row[
+                "company_normalised"
+            ],
             location=JobLocation.model_validate(
-                self._json_value(row["location_json"])
+                self._json_value(
+                    row[
+                        "location_json"
+                    ]
+                )
             ),
             salary=(
-                SalaryRange.model_validate(salary_raw)
+                SalaryRange.model_validate(
+                    salary_raw
+                )
                 if salary_raw
                 else None
             ),
             employment_types=self._json_value(
-                row["employment_types_json"]
+                row[
+                    "employment_types_json"
+                ]
             ),
-            sponsorship_status=row["sponsorship_status"],
+            sponsorship_status=row[
+                "sponsorship_status"
+            ],
             sponsorship_evidence=self._json_value(
-                row["sponsorship_evidence_json"]
+                row[
+                    "sponsorship_evidence_json"
+                ]
             ),
-            description=row["description"],
+            description=row[
+                "description"
+            ],
             responsibilities=self._json_value(
-                row["responsibilities_json"]
+                row[
+                    "responsibilities_json"
+                ]
             ),
             requirements=self._json_value(
-                row["requirements_json"]
+                row[
+                    "requirements_json"
+                ]
             ),
             preferred_skills=self._json_value(
-                row["preferred_skills_json"]
+                row[
+                    "preferred_skills_json"
+                ]
             ),
             benefits=self._json_value(
-                row["benefits_json"]
+                row[
+                    "benefits_json"
+                ]
             ),
-            posted_date=row["posted_date"],
-            closing_date=row["closing_date"],
-            date_found=row["date_found"],
-            status=row["status"],
-            description_hash=row["description_hash"],
-            deduplication_key=row["deduplication_key"],
-            recruiter_name=row["recruiter_name"],
-            recruiter_email=row["recruiter_email"],
+            posted_date=row[
+                "posted_date"
+            ],
+            closing_date=row[
+                "closing_date"
+            ],
+            date_found=row[
+                "date_found"
+            ],
+            status=row[
+                "status"
+            ],
+            description_hash=row[
+                "description_hash"
+            ],
+            deduplication_key=row[
+                "deduplication_key"
+            ],
+            recruiter_name=row[
+                "recruiter_name"
+            ],
+            recruiter_email=row[
+                "recruiter_email"
+            ],
             raw_source_data=self._json_value(
-                row["raw_source_data_json"]
+                row[
+                    "raw_source_data_json"
+                ]
             ),
         )

@@ -3,18 +3,29 @@ generated_on: '2026-07-29'
 status: provisional
 role_strategy:
   primary_roles:
-  - title: AI Engineer
-    basis: explicitly stated in the current CV
-    priority: 1
-  - title: Junior AI Engineer
-    basis: aligned with internship and project evidence
-    priority: 2
-  - title: Machine Learning Engineer
-    basis: supported by deep learning, NLP and classical ML projects
-    priority: 3
-  - title: Data Engineer
-    basis: supported by AWS, ETL and banking pipeline work
-    priority: 4
+    - title: AI Engineer
+      priority: 1
+
+    - title: Junior AI Engineer
+      priority: 2
+
+    - title: AI Engineering Intern
+      priority: 3
+
+    - title: Data Engineer
+      priority: 4
+
+    - title: Junior Data Engineer
+      priority: 5
+
+    - title: Data Engineering Intern
+      priority: 6
+
+    - title: Graduate AI Engineer
+      priority: 7
+
+    - title: Graduate Data Engineer
+      priority: 8
   secondary_roles:
   - NLP Engineer
   - Document AI Engineer
@@ -50,18 +61,19 @@ location_preferences:
   - Kingston upon Thames
   - Surbiton
   - Canary Wharf
+  - Manchester
   work_models:
   - Remote
   - Hybrid
   willing_to_relocate: true
 employment_preferences:
   permanent: true
+  full_time: true
   fixed_term: null
-  graduate_scheme: null
+  graduate_scheme: true
   placement: false
-  internship: false
+  internship: true
   contract: true
-  status: confirmed_by_user_2026-07-29
 search_keywords:
 - AI Engineer
 - Junior AI Engineer
