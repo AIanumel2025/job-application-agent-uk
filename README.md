@@ -119,7 +119,7 @@ python3 -m src.generate_application_pack \
 
 Use `python3 -m <module> --help` for the complete options for any command.
 
-## Repository map
+## Repository structure
 
 ```text
 career_data/          Verified profile, experience, projects, skills, and preferences
